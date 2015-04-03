@@ -1,0 +1,79 @@
+{% extends 'tracker/base.html' %}
+{% load staticfiles %}
+{% load tracker %}
+
+{% block section_title %}{{ event.title|article }} - {% endblock %}
+
+{% block section_content %}
+<h2>{{ event.title|article }}</h2>
+<div class="title-icon">
+    <a href="{% url 'tracker:events:update' event.pk %}"><entry class="glyphicon glyphicon-edit"></entry></a>
+    <a href="{% url 'tracker:entries:create' %}?event={{ event.pk }}"><entry class="glyphicon glyphicon-plus"></entry></a>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if event.description %}
+                <tr>
+                    <td>Description</td>
+                    <td>{{ event.description }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td>Date</td>
+                    <td>{{ event.date }}</td>
+                </tr>
+                <tr>
+                    <td>Progress</td>
+                    <td>{{ event.progress|icon }}</td>
+                </tr>
+                <tr>
+                    <td>Rating</td>
+                    <td>{{ event.rating|stars }}</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>{{ event.get_duration|hours }}</td>
+                </tr>
+                <tr>
+                    <td>Log count</td>
+                    <td>{{ event.entry_count }}</td>
+                </tr>
+                <tr>
+                    <td>Tags</td>
+                    <td>
+                        <ul>
+                            {% for tag in tag_list %}
+                            <li>
+                                <a href="{{ tag.get_absolute_url }}">{{ tag.value|article }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8">
+        <div id="duration-chart"><svg></svg></div>
+        {% include 'tracker/entry_table.html' with detailed=True %}
+    </div>
+</div>
+{% endblock section_content %}
+
+{% block section_foot %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        durationChart('#duration-chart svg', {{ duration_data|safe }}, function(x) {
+            return x === undefined ? '' : d3.time.format('%Y-%m')(new Date(x[0]));
+        });
+    });
+</script>
+{% endblock section_foot %}

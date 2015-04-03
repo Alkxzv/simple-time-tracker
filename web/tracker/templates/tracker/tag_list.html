@@ -1,0 +1,10 @@
+{% extends 'tracker/base.html' %}
+{% load bootstrap3 %}
+
+{% block section_title %}Tags - {% endblock %}
+
+{% block section_content %}
+<h2>Tags</h2>
+{% include 'tracker/tag_table.html' %}
+<div class="text-center">{% bootstrap_pagination page_obj %}</div>
+{% endblock section_content %}

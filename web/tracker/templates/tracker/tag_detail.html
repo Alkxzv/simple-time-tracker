@@ -1,0 +1,53 @@
+{% extends 'tracker/base.html' %}
+{% load tracker %}
+
+{% block section_title %}{{ tag.value|article }} - {% endblock %}
+
+{% block section_content %}
+<h2><em>{{ tag.value|article }}</em></h2>
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rating</td>
+                    <td>{{ tag.get_rating|stars }}</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>{{ tag.get_duration|hours }}</td>
+                </tr>
+                <tr>
+                    <td>Log count</td>
+                    <td>{{ tag.entry_count }}</td>
+                </tr>
+                <tr>
+                    <td>Event count</td>
+                    <td>{{ tag.event_count }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% include 'tracker/event_table.html' %}
+    </div>
+    <div class="col-md-8">
+        <div id="duration-chart"><svg></svg></div>
+        {% include 'tracker/entry_table.html' %}
+    </div>
+</div>
+{% endblock section_content %}
+
+{% block section_foot %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        durationChart('#duration-chart svg', {{ duration_data|safe }}, function(x) {
+            return x === undefined ? '' : d3.time.format('%Y-%m')(new Date(x[0]));
+        });
+    });
+</script>
+{% endblock section_foot %}

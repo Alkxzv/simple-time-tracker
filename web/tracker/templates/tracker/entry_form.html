@@ -1,0 +1,19 @@
+{% extends 'tracker/base.html' %}
+{% load bootstrap3 %}
+{% load tracker %}
+
+{% block section_title %}Edit - {% endblock %}
+
+{% block section_content %}
+<h2>Edit Entry</h2>
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="form-group text-right">
+        {% if entry and not entry.duration %}
+        <a class="btn btn-default" href="{% url 'tracker:entries:close' entry.pk %}">Close Now</a>
+        {% endif %}
+        <input type="submit" class="btn btn-default" value="Save"/>
+    </div>
+</form>
+{% endblock section_content %}

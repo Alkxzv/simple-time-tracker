@@ -1,0 +1,35 @@
+{% extends 'tracker/base.html' %}
+
+{% block section_content %}
+<h2>Yearly</h2>
+<div id="yearly-chart"><svg></svg></div>
+<h2>Monthly</h2>
+<div id="monthly-chart"><svg></svg></div>
+<h2>Daily</h2>
+<div id="weekday-chart"><svg></svg></div>
+{% endblock section_content %}
+
+{% block section_foot %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        durationChart('#yearly-chart svg', {{ yearly_data|safe }}, function(x) {
+            return x === undefined ? '' : d3.time.format('%Y')(new Date(x[0]));
+        });
+        durationChart('#monthly-chart svg', {{ monthly_data|safe }}, function(x) {
+            return x === undefined ? '' : d3.time.format('%Y-%m')(new Date(x[0]));
+        });
+        var dayNames = {
+            0: 'Mo',
+            1: 'Tu',
+            2: 'We',
+            3: 'Th',
+            4: 'Fr',
+            5: 'Sa',
+            6: 'Su',
+        };
+        durationChart('#weekday-chart svg', {{ weekday_data|safe }}, function(x) {
+            return x === undefined ? '' : dayNames[x[0]];
+        });
+    });
+</script>
+{% endblock section_foot %}

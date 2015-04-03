@@ -1,0 +1,20 @@
+{
+  "name": "sitt-static",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Alkxzv/simple-time-tracker",
+  "authors": [
+    "Alkxzv <carlos@lkxz.net>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "nvd3": "~1.7.1"
+  }
+}

@@ -1,0 +1,21 @@
+body {
+    background: #F8F4F2 url('/static/img/struck.png');
+    height: 100%;
+    padding-bottom: 5em;
+}
+h1, h2, h3, h4, h5, .navbar {
+    font-family: 'Fira Sans', sans-serif;
+}
+.table > thead > tr > th {
+    border-bottom: 1px solid #777;
+}
+.table > tbody > tr > td {
+    border: none;
+}
+.table > tbody > tr:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.btn, .form-control, .pagination, .pagination li a {
+    border-radius: 0 !important;
+    box-shadow: none;
+}

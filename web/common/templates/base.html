@@ -1,0 +1,64 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block html_title %}{% block section_title %}{% endblock %}{% endblock %}{{ site_name }}</title>
+    <meta name="description" content="If it's here, you'll find it.">
+    <meta name="author" content="Mistake">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% for link in css_includes %}
+    <link type="text/css" rel="stylesheet" href="{% static link %}">
+    {% endfor %}
+    {% block head %}{% block section_head %}{% endblock %}{% endblock %}
+</head>
+<body>
+    <header class="navbar navbar-inverse navbar-static-top" role="banner">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <entry class="sr-only">Toggle navigation</entry>
+                    <entry class="icon-bar"></entry>
+                    <entry class="icon-bar"></entry>
+                    <entry class="icon-bar"></entry>
+                </button>
+                <a class="navbar-brand" href="{% url 'tracker:main' %}">{{ site_name }}</a>
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    {% block navigation %}
+                    {% if user.is_staff %}
+                    <li><a href="/admin/">Admin</a></li>
+                    {% endif %}
+                    {% endblock navigation %}
+                    {% block section_navigation %}{% endblock %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li><a>{{ user.username }}</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            {% if site_sidebar %}<div class="col-md-9 col-sm-8 main">{% else %}<div class="col-lg-12 col-md-12 col-sm-12 main">{% endif %}
+                {% block content %}{% block section_content %}{% endblock %}{% endblock %}
+            </div>
+            {% if site_sidebar %}<div class="col-md-3 col-sm-4 sidebar">{% else %}<div class="hidden sidebar">{% endif %}
+                {% block sidebar %}{% block section_sidebar %}{% endblock %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    {% for link in js_includes %}
+    <script src="{% static link %}"></script>
+    {% endfor %}
+    {% block foot %}{% block section_foot %}{% endblock %}{% endblock %}
+</body>
+</html>

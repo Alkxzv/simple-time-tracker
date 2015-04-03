@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block section_navigation %}
+    {% if user.is_authenticated %}
+    <li{% if site_section == 'tracker' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:main' %}">Tracker</a>
+    </li>
+    <li{% if site_section == 'entries' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:entries:index' %}">Log</a>
+    </li>
+    <li{% if site_section == 'events' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:events:index' %}">Events</a>
+    </li>
+    <li{% if site_section == 'tags' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:tags:index' %}">Tags</a>
+    </li>
+    <li{% if site_section == 'stats' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:stats' %}">Stats</a>
+    </li>
+    {% endif %}
+{% endblock section_navigation %}

@@ -54,6 +54,7 @@ class EntryView(EntryMixin, DetailView):
 
 
 class EntryCreateView(EntryMixin, CreateView):
+    fields = 'datetime', 'event', 'duration', 'annotation'
 
     def get_initial(self):
         try:
@@ -68,7 +69,7 @@ class EntryCreateView(EntryMixin, CreateView):
 
 
 class EntryUpdateView(EntryMixin, UpdateView):
-    pass
+    fields = 'datetime', 'event', 'duration', 'annotation'
 
 
 class EntryListView(EntryMixin, ListView):

@@ -1,8 +1,7 @@
 from collections import defaultdict
-import datetime as dt
-
 from django.core.urlresolvers import reverse
 from django.db import models
+import datetime as dt
 
 PRO = (
     (None, "~"),

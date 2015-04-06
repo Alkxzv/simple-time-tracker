@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import (CreateView, DetailView, ListView,
                                   TemplateView, UpdateView)
+import datetime as dt
 import json
 
 from . import models, forms
@@ -39,6 +40,16 @@ class StatsView(LoginMixin, SiteMixin, TemplateView):
         context['monthly_data'] = json.dumps(duration_data)
         duration_data = duration_yearly_chart_data(duration)
         context['yearly_data'] = json.dumps(duration_data)
+        # This time n years ago
+        context['n_years_ago'] = []
+        today = dt.date.today()
+        delta = dt.timedelta(3)
+        for year in range(today.year - 1, 2007, -1):
+            start = dt.datetime(year, today.month, today.day, 0, 0) - delta
+            end = dt.datetime(year, today.month, today.day, 23, 59) + delta
+            entries = models.Entry.objects.filter(datetime__range=(start, end))
+            if entries:
+                context['n_years_ago'].append((year, entries))
         return context
 
 

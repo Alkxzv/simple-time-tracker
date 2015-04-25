@@ -72,7 +72,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         durationChart('#duration-chart svg', {{ duration_data|safe }}, function(x) {
-            return x === undefined ? '' : d3.time.format('%Y-%m')(new Date(x[0]));
+            return x === undefined ? '' : d3.time.format('%Y-%m-%d')(new Date(x[0]));
         });
     });
 </script>

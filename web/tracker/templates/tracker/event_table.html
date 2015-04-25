@@ -1,19 +1,10 @@
 {% load tracker %}
 <table class="table table-condensed">
-    <thead>
-        <tr>
-            <th>Event</th>
-            <th class="duration"></th>
-            <th class="rating"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for event in event_list %}
-        <tr>
-            <td><a href="{{ event.get_absolute_url }}">{{ event.title|article }}</a>{% if event.description %} — {{ event.description }}{% endif %}</td>
-            <td>{{ event.duration|hours }}</td>
-            <td>{{ event.rating|stars }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    {% for event in event_list %}
+    <tr>
+        <td><a href="{{ event.get_absolute_url }}">{{ event.title|article }}</a>{% if event.description %} — {{ event.description }}{% endif %}</td>
+        <td class="duration">{{ event.duration|hours }}</td>
+        <td class="rating">{{ event.rating|stars }}</td>
+    </tr>
+    {% endfor %}
 </table>

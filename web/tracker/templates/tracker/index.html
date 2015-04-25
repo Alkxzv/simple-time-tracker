@@ -1,0 +1,16 @@
+{% extends 'tracker/base.html' %}
+
+{% block section_content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Queue</h2>
+        {% include 'tracker/event_table.html' with event_list=pending_events %}
+    </div>
+    <div class="col-md-6">
+        <h2>Ongoing</h2>
+        {% include 'tracker/event_table.html' with event_list=ongoing_events %}
+    </div>
+</div>
+<h2>Current</h2>
+{% include 'tracker/entry_table.html' with entry_list=pending_entries detailed=True %}
+{% endblock section_content %}

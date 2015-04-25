@@ -1,29 +1,21 @@
 {% load tracker %}
 <table class="table table-condensed">
-    <thead>
-        <tr>
-            <th class="datetime">Log</th>
-            <th></th>
-            <th class="duration"></th>
-            <th class="update"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for entry in entry_list %}
-        <tr>
-            <td>{{ entry.datetime }}</td>
-            <td>
-                <a href="{{ entry.event.get_absolute_url }}">{{ entry.event.title|article }}</a>
-                {% if entry.event.description %}
-                — {{ entry.event.description }}
-                {% endif %}
-                {% if entry.annotation %}
-                — {{ entry.annotation }}
-                {% endif %}
-            </td>
-            <td>{{ entry.duration|hours }}</td>
-            <td><a href="{% url 'tracker:entries:update' entry.pk %}"><entry class="glyphicon glyphicon-edit"></entry></a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    {% for entry in entry_list %}
+    <tr>
+        <td class="datetime">{{ entry.datetime }}</td>
+        <td>
+            <a href="{{ entry.event.get_absolute_url }}">{{ entry.event.title|article }}</a>
+            {% if entry.event.description %}
+            — {{ entry.event.description }}
+            {% endif %}
+            {% if entry.annotation %}
+            — {{ entry.annotation }}
+            {% endif %}
+        </td>
+        <td class="duration">{{ entry.duration|hours }}</td>
+        {% if detailed %}
+        <td class="update"><a href="{% url 'tracker:entries:update' entry.pk %}"><entry class="glyphicon glyphicon-edit"></entry></a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
 </table>

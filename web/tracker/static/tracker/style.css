@@ -4,19 +4,27 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.counter, .duration, .rating {
+.counter, .duration {
     width: 5em;
+    text-align: right;
+    font-family: monospace;
+}
+.rating {
+    width: 6em;
+    text-align: center;
+}
+.update {
+    width: 2.5em;
+    text-align: center;
 }
 .datetime {
     width: 10em;
+    font-family: monospace;
 }
 .title-icon {
     float: right;
     font-size: 1.5em;
     margin-top: -2em;
-}
-th.update {
-    width: 1em;
 }
 td ul {
     margin: 0;
@@ -27,4 +35,5 @@ td ul {
 }
 div svg {
     height: 8em;
+    margin-bottom: 2em;
 }

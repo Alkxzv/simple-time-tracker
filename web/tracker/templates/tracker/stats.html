@@ -10,7 +10,7 @@
 <h2>This week in...</h2>
 {% for year, entry_list in n_years_ago %}
 <h4>{{ year }}</h4>
-{% include 'tracker/entry_table.html' with detailed=True %}
+{% include 'tracker/entry_table.html' %}
 {% endfor %}
 {% endblock section_content %}
 

@@ -13,56 +13,49 @@
 <div class="row">
     <div class="col-md-4">
         <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if event.description %}
-                <tr>
-                    <td>Description</td>
-                    <td>{{ event.description }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td>Date</td>
-                    <td>{{ event.date }}</td>
-                </tr>
-                <tr>
-                    <td>Progress</td>
-                    <td>{{ event.progress|icon }}</td>
-                </tr>
-                <tr>
-                    <td>Rating</td>
-                    <td>{{ event.rating|stars }}</td>
-                </tr>
-                <tr>
-                    <td>Time</td>
-                    <td>{{ event.get_duration|hours }}</td>
-                </tr>
-                <tr>
-                    <td>Log count</td>
-                    <td>{{ event.entry_count }}</td>
-                </tr>
-                <tr>
-                    <td>Tags</td>
-                    <td>
-                        <ul>
-                            {% for tag in tag_list %}
-                            <li>
-                                <a href="{{ tag.get_absolute_url }}">{{ tag.value|article }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
+            {% if event.description %}
+            <tr>
+                <td>Description</td>
+                <td>{{ event.description }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Date</td>
+                <td>{{ event.date }}</td>
+            </tr>
+            <tr>
+                <td>Progress</td>
+                <td>{{ event.progress|icon }}</td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td>{{ event.rating|stars }}</td>
+            </tr>
+            <tr>
+                <td>Time</td>
+                <td>{{ event.get_duration|hours }}</td>
+            </tr>
+            <tr>
+                <td>Log count</td>
+                <td>{{ event.entry_count }}</td>
+            </tr>
+            <tr>
+                <td>Tags</td>
+                <td>
+                    <ul>
+                        {% for tag in tag_list %}
+                        <li>
+                            <a href="{{ tag.get_absolute_url }}">{{ tag.value|article }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </table>
     </div>
     <div class="col-md-8">
         <div id="duration-chart"><svg></svg></div>
+        <h3>Log</h3>
         {% include 'tracker/entry_table.html' with detailed=True %}
     </div>
 </div>

@@ -13,7 +13,7 @@ from common.views import LoginMixin, SiteMixin
 
 
 class MainView(LoginMixin, SiteMixin, TemplateView):
-    template_name = 'tracker/main.html'
+    template_name = 'tracker/index.html'
     section = 'tracker'
 
     def get_context_data(self):

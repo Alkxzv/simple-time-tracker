@@ -131,7 +131,7 @@ class TagManager(models.Manager):
 
 
 class Tag(models.Model):
-    value = models.CharField(unique=True, max_length=20)
+    value = models.CharField(unique=True, max_length=50)
     objects = TagManager()
 
     class Meta:

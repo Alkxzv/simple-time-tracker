@@ -1,7 +1,6 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-ALLOWED_HOSTS = ['lkxz.net']
 INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',

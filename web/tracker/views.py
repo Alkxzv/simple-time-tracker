@@ -84,7 +84,9 @@ class EntryUpdateView(EntryMixin, UpdateView):
 
 
 class EntryListView(EntryMixin, ListView):
-    queryset = models.Entry.objects.all().select_related('event')
+    queryset = models.Entry.objects.all()\
+        .select_related('event')\
+        .order_by('-datetime')
     paginate_by = 100
 
     def get_context_data(self, **kwargs):
@@ -138,7 +140,8 @@ class EventUpdateView(EventMixin, UpdateView):
 class EventListView(EventMixin, ListView):
     paginate_by = 100
     queryset = models.Event.objects.all()\
-        .annotate_duration().order_by('-date')
+        .annotate_duration()\
+        .order_by('-date')
 
 
 # Tags
@@ -164,6 +167,9 @@ class TagView(TagMixin, DetailView):
 
 
 class TagListView(TagMixin, ListView):
-    queryset = models.Tag.objects.all().annotate_duration().annotate_rating()\
-        .order_by('-duration')
+    queryset = models.Tag.objects.all()\
+        .annotate_duration()\
+        .annotate_rating()\
+        .extra(select={'upper': 'upper(value)'})\
+        .order_by('upper')
     paginate_by = 100

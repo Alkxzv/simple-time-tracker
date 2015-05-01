@@ -5,6 +5,6 @@
 
 {% block section_content %}
 <h2>Tags</h2>
-{% include 'tracker/tag_table.html' %}
+{% include 'tracker/tag_table.html' with separator='initial' %}
 <div class="text-center">{% bootstrap_pagination page_obj %}</div>
 {% endblock section_content %}

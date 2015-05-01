@@ -1,6 +1,13 @@
 {% load tracker %}
 <table class="table table-condensed">
     {% for event in event_list %}
+    {% if separator == 'year' %}
+    {% ifchanged %}
+    <tr>
+        <td colspan="3"><h4>{{ event.date|date:'Y' }}</h4></td>
+    </tr>
+    {% endifchanged %}
+    {% endif %}
     <tr>
         <td><a href="{{ event.get_absolute_url }}">{{ event.title|article }}</a>{% if event.description %} — {{ event.description }}{% endif %}</td>
         <td class="duration">{{ event.duration|hours }}</td>

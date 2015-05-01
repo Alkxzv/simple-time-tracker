@@ -1,6 +1,13 @@
 {% load tracker %}
 <table class="table table-condensed">
     {% for tag in tag_list %}
+    {% if separator == 'initial' %}
+    {% ifchanged %}
+    <tr>
+        <td colspan="3"><h4>{{ tag.value.0.upper }}</h4></td>
+    </tr>
+    {% endifchanged %}
+    {% endif %}
     <tr>
         <td><a href="{{ tag.get_absolute_url }}">{{ tag.value|article }}</a></td>
         <td class="duration">{{ tag.duration|hours }}</td>

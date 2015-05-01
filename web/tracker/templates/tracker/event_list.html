@@ -6,6 +6,6 @@
 {% block section_content %}
 <h2>Events</h2>
 <div class="title-icon"><a href="{% url 'tracker:events:create' %}"><entry class="glyphicon glyphicon-plus"></entry></a></div>
-{% include 'tracker/event_table.html' %}
+{% include 'tracker/event_table.html' with separator='year' %}
 <div class="text-center">{% bootstrap_pagination page_obj %}</div>
 {% endblock section_content %}

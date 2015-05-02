@@ -155,7 +155,7 @@ class TagView(TagMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        events = self.object.events.all().annotate_duration()
+        events = self.object.events.exclude(rating=None).annotate_duration()
         context['event_list'] = events.order_by('-rating')
         entries = models.Entry.objects.filter(event__in=events)
         entries = entries.select_related('event')

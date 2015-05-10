@@ -12,9 +12,9 @@ register = template.Library()
 def hours(minutes):
     if not minutes:
         return '~'
-    elif minutes < 180:
+    elif minutes < 60:
         return "{:.0f}'".format(minutes)
-    elif minutes / 60 < 20:
+    elif minutes / 60 < 10:
         return "{:.1f}h".format(minutes / 60)
     else:
         return "{:.0f}h".format(minutes / 60)

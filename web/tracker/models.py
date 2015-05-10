@@ -6,9 +6,9 @@ import datetime as dt
 PRO = (
     (None, "~"),
     (1, "Finished"),
-    (2, "Stopped"),
-    (3, "Pending"),
-    (4, "Ongoing"),
+    (2, "Dropped"),
+    (3, "Ongoing"),
+    (4, "Waiting"),
 )
 
 RAT = (

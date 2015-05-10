@@ -19,9 +19,9 @@ class MainView(LoginMixin, SiteMixin, TemplateView):
     def get_context_data(self):
         context = super().get_context_data()
         events = models.Event.objects.filter(progress=3).annotate_duration()
-        context['pending_events'] = events.order_by('-duration')
-        events = models.Event.objects.filter(progress=4).annotate_duration()
         context['ongoing_events'] = events.order_by('-duration')
+        events = models.Event.objects.filter(progress=4).annotate_duration()
+        context['waiting_events'] = events.order_by('-duration')
         entries = models.Entry.objects.filter(duration=None)
         context['pending_entries'] = entries.order_by('-datetime')
         return context

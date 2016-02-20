@@ -53,6 +53,14 @@ class StatsView(LoginMixin, SiteMixin, TemplateView):
         return context
 
 
+class TopView(SiteMixin, ListView):
+    template_name = 'tracker/top.html'
+    section = 'top'
+    queryset = models.Event.objects.all()\
+        .annotate_duration()\
+        .order_by('-rating', '-duration')
+
+
 # Entries
 
 class EntryMixin(LoginMixin, SiteMixin):
@@ -156,7 +164,7 @@ class TagView(TagMixin, DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         events = self.object.events.exclude(rating=None).annotate_duration()
-        context['event_list'] = events.order_by('-rating')
+        context['event_list'] = events.order_by('-rating', '-duration')
         entries = models.Entry.objects.filter(event__in=events)
         entries = entries.select_related('event')
         context['entry_list'] = entries.order_by('-datetime')

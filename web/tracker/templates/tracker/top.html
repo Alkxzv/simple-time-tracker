@@ -1,0 +1,21 @@
+{% extends 'tracker/base.html' %}
+{% load tracker %}
+
+{% block section_head %}
+<style type="text/css" media="screen">
+    ul {
+        list-style: none;
+    }
+</style>
+{% endblock section_head %}
+
+{% block section_content %}
+<table>
+    {% for event in event_list %}
+    <tr>
+        <td>{{ event.title|article }}{% if event.description %} — {{ event.description }}{% endif %}</td>
+        <td>{{ event.rating|stars }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock section_content %}

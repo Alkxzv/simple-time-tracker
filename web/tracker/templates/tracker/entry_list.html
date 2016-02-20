@@ -1,10 +1,10 @@
 {% extends 'tracker/base.html' %}
 {% load bootstrap3 %}
 
-{% block section_title %}Log - {% endblock %}
+{% block section_title %}Entries - {% endblock %}
 
 {% block section_content %}
-<h2>Log</h2>
+<h2>Entries</h2>
 <div class="title-icon"><a href="{% url 'tracker:entries:create' %}"><entry class="glyphicon glyphicon-plus"></entry></a></div>
 <div id="duration-chart"><svg></svg></div>
 {% include 'tracker/entry_table.html' with detailed=True %}

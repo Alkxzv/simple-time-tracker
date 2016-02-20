@@ -6,7 +6,7 @@
         <a href="{% url 'tracker:main' %}">Tracker</a>
     </li>
     <li{% if site_section == 'entries' %} class="active" {% endif %}>
-        <a href="{% url 'tracker:entries:index' %}">Log</a>
+        <a href="{% url 'tracker:entries:index' %}">Entries</a>
     </li>
     <li{% if site_section == 'events' %} class="active" {% endif %}>
         <a href="{% url 'tracker:events:index' %}">Events</a>
@@ -18,4 +18,7 @@
         <a href="{% url 'tracker:stats' %}">Stats</a>
     </li>
     {% endif %}
+    <li{% if site_section == 'top' %} class="active" {% endif %}>
+        <a href="{% url 'tracker:top' %}">Top</a>
+    </li>
 {% endblock section_navigation %}

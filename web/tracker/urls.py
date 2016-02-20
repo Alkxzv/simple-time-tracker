@@ -29,8 +29,9 @@ tags = [
 
 urlpatterns = [
     url(r'^events/', include(events, namespace='events')),
-    url(r'^log/', include(entries, namespace='entries')),
+    url(r'^entries/', include(entries, namespace='entries')),
     url(r'^tags/', include(tags, namespace='tags')),
     url(r'^stats/$', views.StatsView.as_view(), name='stats'),
+    url(r'^top/$', views.TopView.as_view(), name='top'),
     url(r'^$', views.MainView.as_view(), name='main'),
 ]

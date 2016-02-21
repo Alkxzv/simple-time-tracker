@@ -1,6 +1,7 @@
 from collections import defaultdict
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 import datetime as dt
 
 PRO = (
@@ -21,6 +22,8 @@ RAT = (
     (5, "●●●●● Excellent"),
 )
 
+START_DATE = dt.datetime(2010, 1, 1).replace(tzinfo=timezone.utc)
+
 
 # Entries
 
@@ -29,7 +32,7 @@ class EntryQuerySet(models.query.QuerySet):
     def duration_over_time(self):
         datetime_sum = defaultdict(int)
         for datetime, duration in self.values_list('datetime', 'duration'):
-            if duration and datetime >= dt.datetime(2010, 1, 1):
+            if duration and datetime >= START_DATE:
                 datetime_sum[datetime.date()] += duration
         keys = datetime_sum.keys()
         if keys:

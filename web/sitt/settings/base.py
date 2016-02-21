@@ -1,7 +1,7 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-INSTALLED_APPS = (
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+INSTALLED_APPS = [
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -12,36 +12,61 @@ INSTALLED_APPS = (
     'bootstrap3',
     'common',
     'tracker',
-)
-MIDDLEWARE_CLASSES = (
+]
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    'django.core.context_processors.request',
-    "django.contrib.messages.context_processors.messages",
-    "common.context_processors.common_context",
-)
-LOGIN_REDIRECT_URL = 'tracker:main'
-STATIC_URL = '/static/'
+]
 ROOT_URLCONF = 'sitt.urls'
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+            "common.context_processors.common_context",
+        ],
+    },
+}]
+WSGI_APPLICATION = 'sitt.wsgi.application'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+AUTH_PASSWORD_VALIDATORS = [{
+    'NAME':
+    'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+}, {
+    'NAME':
+    'django.contrib.auth.password_validation.MinimumLengthValidator',
+}, {
+    'NAME':
+    'django.contrib.auth.password_validation.CommonPasswordValidator',
+},  {
+    'NAME':
+    'django.contrib.auth.password_validation.NumericPasswordValidator',
+}]
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Brussels'
 USE_I18N = False
 USE_L10N = False
-USE_TZ = False
-DATETIME_FORMAT = 'Y-m-d H:i'
+USE_TZ = True
+DATETIME_FORMAT = 'Y-m-d D H:i'
 DATE_FORMAT = 'Y-m-d'
+STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = 'tracker:main'
 COMMON_CONTEXT = {
     'site_name': 'Simple Time Tracker',
     'css_includes': (

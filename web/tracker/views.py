@@ -46,7 +46,9 @@ class StatsView(LoginMixin, SiteMixin, TemplateView):
         delta = dt.timedelta(3)
         for year in range(today.year - 1, 2007, -1):
             start = dt.datetime(year, today.month, today.day, 0, 0) - delta
+            start = start.replace(tzinfo=timezone.utc)
             end = dt.datetime(year, today.month, today.day, 23, 59) + delta
+            end = end.replace(tzinfo=timezone.utc)
             entries = models.Entry.objects.filter(datetime__range=(start, end))
             if entries:
                 context['n_years_ago'].append((year, entries))

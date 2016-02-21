@@ -2,18 +2,17 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
-STATIC_ROOT = os.environ.get('STATIC_ROOT')
-TEMPLATE_DEBUG = False
+STATIC_ROOT = os.path.join('sitt', 'static')
 WSGI_APPLICATION = 'sitt.wsgi.application'
-ALLOWED_HOSTS = ['sitt.lkxz.net']
+ALLOWED_HOSTS = ['.lkxz.net']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': os.environ.get('POSTGRES_PORT_5432_TCP_ADDR'),
-        'NAME': 'sittdb',
-        'PASSWORD': os.environ.get('POSTGRES_ENV_POSTGRES_PASSWORD'),
-        'PORT': os.environ.get('POSTGRES_PORT_5432_TCP_PORT'),
-        'USER': 'postgres',
+        'HOST': 'localhost',
+        'NAME': 'sitt',
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'PORT': 5432,
+        'USER': 'sittuser',
     }
 }
 LOGGING = {
@@ -23,7 +22,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': os.environ.get('LOG_FILE', '/tmp/sitt-django.log'),
+            'filename': os.path.join('sitt', 'django.log'),
         },
     },
     'loggers': {

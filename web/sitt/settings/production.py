@@ -8,10 +8,7 @@ ALLOWED_HOSTS = ['.lkxz.net']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'localhost',
         'NAME': 'sitt',
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'PORT': 5432,
         'USER': os.environ.get('POSTGRES_USER'),
     }
 }
@@ -22,7 +19,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/sitt/logs',
+            'filename': '/sitt/django.log',
         },
     },
     'loggers': {

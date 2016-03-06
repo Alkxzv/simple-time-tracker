@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
-STATIC_ROOT = os.environ.get('STATIC_ROOT')
+STATIC_ROOT = '/sitt/static'
 WSGI_APPLICATION = 'sitt.wsgi.application'
 ALLOWED_HOSTS = ['.lkxz.net']
 DATABASES = {
@@ -22,7 +22,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': os.environ.get('LOG_FILE'),
+            'filename': '/sitt/logs',
         },
     },
     'loggers': {

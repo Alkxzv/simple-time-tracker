@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
-STATIC_ROOT = os.path.join('sitt', 'static')
+STATIC_ROOT = os.environ.get('STATIC_ROOT')
 WSGI_APPLICATION = 'sitt.wsgi.application'
 ALLOWED_HOSTS = ['.lkxz.net']
 DATABASES = {
@@ -12,7 +12,7 @@ DATABASES = {
         'NAME': 'sitt',
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
         'PORT': 5432,
-        'USER': 'sittuser',
+        'USER': os.environ.get('POSTGRES_USER'),
     }
 }
 LOGGING = {
@@ -22,7 +22,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': os.path.join('sitt', 'django.log'),
+            'filename': os.environ.get('LOG_FILE'),
         },
     },
     'loggers': {

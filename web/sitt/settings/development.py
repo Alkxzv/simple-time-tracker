@@ -1,15 +1,11 @@
 from .base import *
 
-SECRET_KEY = 'development'
 DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY')
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'localhost',
-        'NAME': 'sitt',
-        'PASSWORD': '',
-        'PORT': 5432,
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sitt.sqlite3',
     }
 }
 INSTALLED_APPS += (

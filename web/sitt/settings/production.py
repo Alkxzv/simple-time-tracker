@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
-STATIC_ROOT = '/sitt/static'
+STATIC_ROOT = os.path.join(os.environ.get('PROJECT_PATH'), 'static')
 WSGI_APPLICATION = 'sitt.wsgi.application'
 ALLOWED_HOSTS = ['.lkxz.net']
 DATABASES = {
@@ -19,7 +19,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/sitt/django.log',
+            'filename': os.path.join(os.environ.get('PROJECT_PATH'), 'django.log'),
         },
     },
     'loggers': {
